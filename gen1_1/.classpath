@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="template/" kind="src" path="src"/>
+	<classpathentry kind="src" path="template"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/freemarker.jar"/>
+	<classpathentry kind="lib" path="lib/icu4j-2.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/jaxen-1.1-beta-6.jar"/>
+	<classpathentry kind="lib" path="lib/jdom-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/tagsoup-0.9.7.jar"/>
+	<classpathentry kind="lib" path="lib/xalan-2.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/xercesImpl-2.6.2.jar"/>
+	<classpathentry kind="lib" path="lib/xml-apis-1.0.b2.jar"/>
+	<classpathentry kind="lib" path="lib/xmlParserAPIs-2.6.2.jar"/>
+	<classpathentry kind="lib" path="lib/xom-1.0b3.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.30.jar"/>
+	<classpathentry kind="lib" path="lib/ojdbc14.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

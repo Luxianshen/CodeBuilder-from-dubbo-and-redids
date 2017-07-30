@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 我相信我不说,你们也能看懂a,c,o表示什么 -->
+<Config xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
+	<o:conf>
+		
+		<!-- 额外的自定义参数 -->
+		<c:paramMap>
+			<!-- 作者名称 -->
+			<a:author>lujiasheng</a:author>
+			<!-- 使用pdm或者数据库,true:pdm,false:数据库 -->
+			<a:isPdm>false</a:isPdm>
+			<!-- 如果是使用pdm,那么就写上pmd的路径 -->
+			<!-- <a:pdmUrl>G:\minstone\数据库库表结构\统一用户/统一用户.pdm</a:pdmUrl> -->
+			
+			<!-- 如果是数据库,那么就写上数据库名称 -->
+			<a:driver>com.mysql.jdbc.Driver</a:driver>
+			<a:url>jdbc:mysql://192.168.0.144:3306/platform?useUnicode=true&amp;characterEncoding=utf-8</a:url>
+			<a:username>platform</a:username>
+			<a:password>11</a:password>
+			<!-- 如果是数据库,那么就写上表名 -->
+			<a:tableName>c_sys_phrase</a:tableName>
+			<!-- 表业务唯一主键 ,数据库设计事请别用id做主键 -->
+			<a:pk>UUID</a:pk>
+			<!-- 数据库表注释,数据库的情况下需要写上(因为不知道如何去获取数据库的注释.) -->
+			<a:comment>常用语</a:comment>
+			
+			<!-- model名称 ，首字母大写-->
+			<a:modelName>Phrase</a:modelName>
+			<!-- 生成的代码包名路径 -->
+			<a:packageName>com.minstone.platform.bdm.phrase</a:packageName>
+			<!-- 想要生成的parent项目的名字 -->
+			<a:parentProjectName>platform-bdm-parent</a:parentProjectName>
+			<!-- parent接口版本 -->
+			<a:parentProjectVersion>0.0.1-SNAPSHOT</a:parentProjectVersion>
+			<!-- 想要生成的api项目的名字 -->
+			<a:apiProjectName>bdm-phrase-api</a:apiProjectName>
+			<!-- api接口版本 -->
+			<a:apiProjectVersion>0.0.1-SNAPSHOT</a:apiProjectVersion>
+			<!-- 想要生成的provider项目的名字 -->
+			<a:providerProjectName>bdm-phrase-provider</a:providerProjectName>
+			<!-- provider项目是否需要储存到redis true需要 false不需要-->
+			<a:modelRedis>false</a:modelRedis>
+			<!-- provider项目用于redis key值 格式 YYZC_BDM_DB-->
+			<a:constant>YYZC_BDM_PHRASE</a:constant>
+			<!-- provider接口版本 -->
+			<a:providerProjectVersion>0.0.1-SNAPSHOT</a:providerProjectVersion>
+			<!-- 想要生成的provider项目的注册ip -->
+			<a:providerProjectAddress>192.168.0.213:2281</a:providerProjectAddress>
+			<!-- 想要生成的provider项目的注册端口 -->
+			<a:providerProjectPort>20823</a:providerProjectPort>
+			<!-- 想要生成的provider项目,用dubbo协议端口暴露服务名字 -->
+			<a:providerProjectDubboProtocolName>dubbo</a:providerProjectDubboProtocolName>
+			<!-- 想要生成的文件的路径 -->
+			<a:targetPath>D:/test/</a:targetPath>
+			<!-- 模板包名,不同的项目,使用的模板可能不一样,那么可以区分开来. -->
+			<a:tplsPackageUrl>genTemplate</a:tplsPackageUrl>
+		</c:paramMap>
+		
+		<!-- 模板配置 -->
+		<c:tpls>
+			<!-- 第一个为配置dubboService的模板，如果有两个服务在同一个项目上，生成一个后需屏蔽然后修改里面对应的服务提供 -->
+			<o:tpl>
+				<a:name>dubboService.ftl</a:name>
+				<a:default>false</a:default>
+				<a:srcPath>src/main/resources</a:srcPath>
+				<a:suffix>META-INF</a:suffix>
+				<a:fileName>dubboService.xml</a:fileName>
+			</o:tpl>
+			<!-- demo
+			<o:tpl>
+				<a:name>controller.ftl</a:name>//模板名称
+				<a:default>true</a:default>//该模板是否默认路径生成的文件的路径
+				<a:isApiPath>true</a:isApiPath>//是否为api路径包
+				<a:srcPath>src/main/java</a:srcPath>//src路径
+				<a:suffix>controller</a:suffix>//类路径，为空时放在最顶路径
+				<a:fileName>{0}Controller.java</a:fileName>//问津匹配
+			</o:tpl>
+			 -->
+			<!-- main配置 -->
+			<o:tpl>
+				<a:name>model.ftl</a:name>
+				<a:default>true</a:default>
+				<a:isApiPath>true</a:isApiPath>
+				<a:srcPath>src/main/java</a:srcPath>
+				<a:suffix>model</a:suffix>
+				<a:fileName>{0}.java</a:fileName>
+			</o:tpl>
+			<o:tpl>
+				<a:name>iApi.ftl</a:name>
+				<a:default>true</a:default>
+				<a:isApiPath>true</a:isApiPath>
+				<a:srcPath>src/main/java</a:srcPath>
+				<a:suffix>service</a:suffix>
+				<a:fileName>I{0}Api.java</a:fileName>
+			</o:tpl>
+			<o:tpl>
+				<a:name>constant.ftl</a:name>
+				<a:default>true</a:default>
+				<a:isApiPath>true</a:isApiPath>
+				<a:srcPath>src/main/java</a:srcPath>
+				<a:suffix>constant</a:suffix>
+				<a:fileName>{0}Constant.java</a:fileName>
+			</o:tpl>
+			<o:tpl>
+				<a:name>mybatisDao.ftl</a:name>
+				<a:default>false</a:default>
+				<a:srcPath>src/main/resources</a:srcPath>
+				<a:suffix>mappings.modules.{0}</a:suffix>
+				<a:fileName>{0}Dao.xml</a:fileName>
+			</o:tpl>
+			<o:tpl>
+				<a:name>mybatis-config.ftl</a:name>
+				<a:default>false</a:default>
+				<a:srcPath>src/main</a:srcPath>
+				<a:suffix>resources</a:suffix>
+				<a:fileName>mybatis-config.xml</a:fileName>
+			</o:tpl>
+			<o:tpl>
+				<a:name>dao.ftl</a:name>
+				<a:default>true</a:default>
+				<a:srcPath>src/main/java</a:srcPath>
+				<a:suffix>dao</a:suffix>
+				<a:fileName>{0}Dao.java</a:fileName>
+			</o:tpl>
+			<o:tpl>
+				<a:name>service.ftl</a:name>
+				<a:default>true</a:default>
+				<a:srcPath>src/main/java</a:srcPath>
+				<a:suffix>service</a:suffix>
+				<a:fileName>{0}Service.java</a:fileName>
+			</o:tpl>
+			<o:tpl>
+				<a:name>serviceImpl.ftl</a:name>
+				<a:default>true</a:default>
+				<a:srcPath>src/main/java</a:srcPath>
+				<a:suffix>api</a:suffix>
+				<a:fileName>{0}ApiImpl.java</a:fileName>
+			</o:tpl>
+			<!-- <o:tpl>
+				<a:name>controller.ftl</a:name>
+				<a:default>true</a:default>
+				<a:srcPath>src/main/java</a:srcPath>
+				<a:suffix>controller</a:suffix>
+				<a:fileName>{0}Controller.java</a:fileName>
+			</o:tpl> -->
+			<o:tpl>
+				<a:name>apipom.ftl</a:name>
+				<a:default>false</a:default>
+				<a:isApiPath>true</a:isApiPath>
+				<a:suffix></a:suffix>
+				<a:fileName>pom.xml</a:fileName>
+			</o:tpl>
+			<o:tpl>
+				<a:name>providerpom.ftl</a:name>
+				<a:default>false</a:default>
+				<a:suffix></a:suffix>
+				<a:fileName>pom.xml</a:fileName>
+			</o:tpl>
+			<o:tpl>
+				<a:name>myBatisConfig.ftl</a:name>
+				<a:default>false</a:default>
+				<a:srcPath>src/main/java</a:srcPath>
+				<a:suffix>com.minstone.platform.configuration</a:suffix>
+				<a:fileName>MyBatisConfig.java</a:fileName>
+			</o:tpl>
+			<o:tpl>
+				<a:name>myBatisMapperScannerConfig.ftl</a:name>
+				<a:default>false</a:default>
+				<a:srcPath>src/main/java</a:srcPath>
+				<a:suffix>com.minstone.platform.configuration</a:suffix>
+				<a:fileName>MyBatisMapperScannerConfig.java</a:fileName>
+			</o:tpl>
+			<o:tpl>
+				<a:name>application.ftl</a:name>
+				<a:default>false</a:default>
+				<a:srcPath>src/main/java</a:srcPath>
+				<a:suffix>com.minstone.platform</a:suffix>
+				<a:fileName>Application.java</a:fileName>
+			</o:tpl>
+			<!-- test配置 -->
+			<o:tpl>
+				<a:name>test-applicationProperties.ftl</a:name>
+				<a:default>false</a:default>
+				<a:srcPath>src/test</a:srcPath>
+				<a:suffix>resources</a:suffix>
+				<a:fileName>application.properties</a:fileName>
+			</o:tpl>
+			<o:tpl>
+				<a:name>test-applicationYML.ftl</a:name>
+				<a:default>false</a:default>
+				<a:srcPath>src/test</a:srcPath>
+				<a:suffix>resources</a:suffix>
+				<a:fileName>application.yml</a:fileName>
+			</o:tpl>
+			<o:tpl>
+				<a:name>test-logback.ftl</a:name>
+				<a:default>false</a:default>
+				<a:srcPath>src/test</a:srcPath>
+				<a:suffix>resources</a:suffix>
+				<a:fileName>logback.xml</a:fileName>
+			</o:tpl>
+			<o:tpl>
+				<a:name>test-dubboProperties.ftl</a:name>
+				<a:default>false</a:default>
+				<a:srcPath>src/test</a:srcPath>
+				<a:suffix>resources</a:suffix>
+				<a:fileName>dubbo.properties</a:fileName>
+			</o:tpl>
+			<o:tpl>
+				<a:name>test-providerApplication.ftl</a:name>
+				<a:default>true</a:default>
+				<a:srcPath>src/test/java</a:srcPath>
+				<a:suffix>test.service</a:suffix>
+				<a:fileName>{0}ProviderApplication.java</a:fileName>
+			</o:tpl>
+		</c:tpls>
+		
+		<!-- 
+			mybatis配置文件相关,一般来说一下的配置并不需要改动他,参数的说明请查看:
+			com.minstione.common.gx.gen.model.FieldType类	
+		 -->
+		<c:FieldTypes>
+			<!-- 
+			目前支持的有:
+			VARCHAR2,VARCHAR,BLOB,CLOB,NUMBER,INT,TIMESTAMP
+			如果有需要那么自己复制一个节点继续添加即可
+			 -->       
+			<o:FieldType>
+				<a:sqlFieldType>VARCHAR2</a:sqlFieldType>
+				<a:modelFieldType>String</a:modelFieldType>
+				<a:mybatisFieldType>VARCHAR</a:mybatisFieldType>
+				<a:importClass></a:importClass>
+			</o:FieldType>
+			<o:FieldType>
+				<a:sqlFieldType>VARCHAR</a:sqlFieldType>
+				<a:modelFieldType>String</a:modelFieldType>
+				<a:mybatisFieldType>VARCHAR</a:mybatisFieldType>
+				<a:importClass></a:importClass>
+			</o:FieldType>    
+			<o:FieldType>
+				<a:sqlFieldType>NVARCHAR</a:sqlFieldType>
+				<a:modelFieldType>String</a:modelFieldType>
+				<a:mybatisFieldType>VARCHAR</a:mybatisFieldType>
+				<a:importClass></a:importClass>
+			</o:FieldType>    
+			<o:FieldType>
+				<a:sqlFieldType>BLOB</a:sqlFieldType>
+				<a:modelFieldType>String</a:modelFieldType>
+				<a:mybatisFieldType>VARCHAR</a:mybatisFieldType>
+				<a:importClass></a:importClass>
+			</o:FieldType>                                              
+			<o:FieldType>
+				<a:sqlFieldType>CLOB</a:sqlFieldType>
+				<a:modelFieldType>String</a:modelFieldType>
+				<a:mybatisFieldType>VARCHAR</a:mybatisFieldType>
+				<a:importClass></a:importClass>
+			</o:FieldType>                                              
+			<o:FieldType>
+				<a:sqlFieldType>NUMBER</a:sqlFieldType>
+				<a:modelFieldType>Integer</a:modelFieldType>
+				<a:mybatisFieldType>NUMERIC</a:mybatisFieldType>
+				<a:importClass></a:importClass>
+			</o:FieldType>                                              
+			<o:FieldType>
+				<a:sqlFieldType>BIT</a:sqlFieldType>
+				<a:modelFieldType>Integer</a:modelFieldType>
+				<a:mybatisFieldType>NUMERIC</a:mybatisFieldType>
+				<a:importClass></a:importClass>
+			</o:FieldType>                                              
+			<o:FieldType>
+				<a:sqlFieldType>INT</a:sqlFieldType>
+				<a:modelFieldType>Integer</a:modelFieldType>
+				<a:mybatisFieldType>NUMERIC</a:mybatisFieldType>
+				<a:importClass></a:importClass>
+			</o:FieldType>                                              
+			<o:FieldType>
+				<a:sqlFieldType>TIMESTAMP</a:sqlFieldType>
+				<a:modelFieldType>Date</a:modelFieldType>
+				<a:mybatisFieldType>TIMESTAMP</a:mybatisFieldType>
+				<a:importClass>import java.util.Date;</a:importClass>
+			</o:FieldType>
+			<o:FieldType>
+				<a:sqlFieldType>DATE</a:sqlFieldType>
+				<a:modelFieldType>Date</a:modelFieldType>
+				<a:mybatisFieldType>DATE</a:mybatisFieldType>
+				<a:importClass>import java.util.Date;</a:importClass>
+			</o:FieldType>
+			<o:FieldType>
+				<a:sqlFieldType>FLOAT</a:sqlFieldType>
+				<a:modelFieldType>Float</a:modelFieldType>
+				<a:mybatisFieldType>NUMERIC</a:mybatisFieldType>
+				<a:importClass></a:importClass>
+			</o:FieldType>
+			<o:FieldType>
+				<a:sqlFieldType>DOUBLE</a:sqlFieldType>
+				<a:modelFieldType>Double</a:modelFieldType>
+				<a:mybatisFieldType>NUMERIC</a:mybatisFieldType>
+				<a:importClass></a:importClass>
+			</o:FieldType> 
+			<!-- 
+			<o:FieldType>
+				<a:sqlFieldType></a:sqlFieldType>
+				<a:modelFieldType></a:modelFieldType>
+				<a:mybatisFieldType></a:mybatisFieldType>
+				<a:importClass></a:importClass>
+			</o:FieldType>
+			 -->      
+			                                    
+		</c:FieldTypes>
+	</o:conf>
+</Config>
